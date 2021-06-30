@@ -63,7 +63,8 @@
               onsubmit="return validate();"
             >
               <div
-                class="formData">
+                class="formData"
+                id="firstName">
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
@@ -74,7 +75,8 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData"
+                id="lastName">
                 <label for="last">Nom</label><br>
                 <input
                   class="text-control"
@@ -85,7 +87,8 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData"
+                id="emailInput">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -105,13 +108,15 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData"
+                id="numberInput">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
               <p class="text-label">Quelles villes ?</p>
               <div
-                class="formData">
+                class="formData"
+                id="locationBtn">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -181,11 +186,13 @@
               </div>
 
               <div
-                class="formData">
+                class="formData"
+                id="agreeBtn">
                 <input
                   class="checkbox-input"
                   type="radio"
                   id="checkbox1"
+                  checked
                   required
                 />
                 <label class="checkbox2-label" for="checkbox1" required>

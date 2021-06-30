@@ -48,7 +48,13 @@ function firstValidate(){
   if(value.length >= 2 && value != null) {
     console.log("First Name ok");
     return true
-  } else { return false }
+  } else { 
+    let parentElt = document.querySelector('.formData');
+    let errorMess = document.createElement('p');
+    parentElt.appendChild(errorMess);
+    errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
+    return false 
+  }
 }
 
 
@@ -59,7 +65,13 @@ function lastValidate(){
   if(value.length >= 2 && value != null) {
     console.log("Last Name ok");
     return true
-  } else { return false }
+  } else { 
+    let parentElt = document.querySelector('#lastName');
+    let errorMess = document.createElement('p');
+    parentElt.appendChild(errorMess);
+    errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
+    return false 
+  }
 }
 
 
@@ -73,7 +85,14 @@ function emailValidate(){
   if (email["type"]== "email" && value > 2 && emailText.includes("@")) {
     console.log("Email ok");
     return true 
-  } else { return false}
+  } else { 
+    console.log("Veuillez entrer une adresse mail valide.");
+    let parentElt = document.querySelector('#emailInput');
+    let errorMess = document.createElement('p');
+    parentElt.appendChild(errorMess);
+    errorMess.textContent="Veuillez entrer une adresse mail valide.";
+    return false
+  }
 }
 
 //Check number validity function
@@ -83,7 +102,14 @@ function quantityValidate() {
   if(quantity["type"]=="number" && numberValue.length > 0) {
     console.log('quantity ok',numberValue, quantity["type"] );
     return true
-  } else {  return false}
+  } else {  
+    console.log("Veuillez entrer un chiffre.");
+    let parentElt = document.querySelector('#numberInput');
+    let errorMess = document.createElement('p');
+    parentElt.appendChild(errorMess);
+    errorMess.textContent="Veuillez entrer un chiffre.";
+    return false
+  }
 }
 
 //Check at least one selected  button function
@@ -96,7 +122,11 @@ function locationValidate(){
       return true;
     } 
   }
-  console.log('location not ok');
+  console.log('Veuillez choisir une option.');
+  let parentElt = document.querySelector('#locationBtn');
+  let errorMess = document.createElement('p');
+  parentElt.appendChild(errorMess);
+  errorMess.textContent="Veuillez choisir une option.";
   return false;
 }
 
@@ -107,7 +137,11 @@ function agreeValidate(){
     console.log('Conditions ok');
     return true
   } else { 
-    console.log('Conditions not ok');
+    console.log('Vous devez accepter les termes et conditions.');
+    let parentElt = document.querySelector('#agreeBtn');
+    let errorMess = document.createElement('p');
+    parentElt.appendChild(errorMess);
+    errorMess.textContent="Vous devez accepter les termes et conditions.";
     return false
     }
 }
@@ -118,6 +152,17 @@ function agreeValidate(){
 submitBtn.addEventListener('click', validate);
 
 function validate(e){
+
+    //Si l'une des fonctions suivante ne retourne pas true
+    if ( !firstValidate() || 
+    !lastValidate() ||
+    !emailValidate() ||
+    !quantityValidate() ||
+    !locationValidate() 
+) 
+//On empêche le formulaire d'être validé
+{  e.preventDefault();  }
+
   //Exécute les fonctions précédentes
   firstValidate();
   lastValidate();
@@ -126,13 +171,5 @@ function validate(e){
   locationValidate();
   agreeValidate();
 
-  //Si l'une des fonctions suivante ne retourne pas true
-  if ( !firstValidate() || 
-       !lastValidate() ||
-       !emailValidate() ||
-       !quantityValidate() ||
-       !locationValidate() 
-  ) 
-  //On empêche le formulaire d'être validé
-  {  e.preventDefault();}
+
 }
