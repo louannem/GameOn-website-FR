@@ -208,7 +208,7 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.formData[data-error]::after {
+.formData[data-error]::after, .error {
   content: attr(data-error);
   font-size: 0.4em;
   color: #e54858;
@@ -220,7 +220,7 @@ input {
   opacity: 0;
   transition: 0.3s;
 }
-.formData[data-error-visible="true"]::after {
+.formData[data-error-visible="true"]::after, .error {
   opacity: 1;
 }
 .formData[data-error-visible="true"] .text-control {

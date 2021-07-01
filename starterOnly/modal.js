@@ -41,127 +41,128 @@ const submitBtn = document.getElementById('btn-submit');
 
 
 
-//Check first name validity function
-function firstValidate(){
-  var value = firstName.value;
-  //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
-  if(value.length >= 2 && value != null) {
-    console.log("First Name ok");
-    return true
-  } else { 
-    let parentElt = document.querySelector('.formData');
-    let errorMess = document.createElement('p');
-    parentElt.appendChild(errorMess);
-    errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
-    return false 
-  }
-}
-
-
-//Check last name validity function
-function lastValidate(){
-  var value = lastName.value;
-  //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
-  if(value.length >= 2 && value != null) {
-    console.log("Last Name ok");
-    return true
-  } else { 
-    let parentElt = document.querySelector('#lastName');
-    let errorMess = document.createElement('p');
-    parentElt.appendChild(errorMess);
-    errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
-    return false 
-  }
-}
-
-
-//Check mail validity function
-function emailValidate(){
-  //Récupère la longueur du texte
-  var value = email.value.length;
-  //Récupère la valeur entrée dans l'input
-  var emailText = email.value;
-  //On vérifie que l'input est de type email, d'au moins 2 caractères et possède un @
-  if (email["type"]== "email" && value > 2 && emailText.includes("@")) {
-    console.log("Email ok");
-    return true 
-  } else { 
-    console.log("Veuillez entrer une adresse mail valide.");
-    let parentElt = document.querySelector('#emailInput');
-    let errorMess = document.createElement('p');
-    parentElt.appendChild(errorMess);
-    errorMess.textContent="Veuillez entrer une adresse mail valide.";
-    return false
-  }
-}
-
-//Check number validity function
-function quantityValidate() {
-  var numberValue = quantity.value;
-  //On vérifie que l'input est de type nombre et contient au moins 1 caractère
-  if(quantity["type"]=="number" && numberValue.length > 0) {
-    console.log('quantity ok',numberValue, quantity["type"] );
-    return true
-  } else {  
-    console.log("Veuillez entrer un chiffre.");
-    let parentElt = document.querySelector('#numberInput');
-    let errorMess = document.createElement('p');
-    parentElt.appendChild(errorMess);
-    errorMess.textContent="Veuillez entrer un chiffre.";
-    return false
-  }
-}
-
-//Check at least one selected  button function
-function locationValidate(){
-  //Pour chaque bouton radio
-  for (var i = 0; i<checkBtn.length; i++) {
-    //On vérifie si que le type est bien 'radio' et que le bouton est coché
-    if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
-      console.log('location ok');
-      return true;
-    } 
-  }
-  console.log('Veuillez choisir une option.');
-  let parentElt = document.querySelector('#locationBtn');
-  let errorMess = document.createElement('p');
-  parentElt.appendChild(errorMess);
-  errorMess.textContent="Veuillez choisir une option.";
-  return false;
-}
-
-
-//Check agreement box
-function agreeValidate(){
-  if(agreeBtn.checked) {
-    console.log('Conditions ok');
-    return true
-  } else { 
-    console.log('Vous devez accepter les termes et conditions.');
-    let parentElt = document.querySelector('#agreeBtn');
-    let errorMess = document.createElement('p');
-    parentElt.appendChild(errorMess);
-    errorMess.textContent="Vous devez accepter les termes et conditions.";
-    return false
-    }
-}
-
-
-
 //Validate function
 submitBtn.addEventListener('click', validate);
 
 function validate(e){
+  //Check first name validity function
+  function firstValidate(){
+    var value = firstName.value;
+    let parentElt = document.querySelector('.formData');
+    let errorMess = document.createElement('p');
+    //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
+    if(value.length >= 2 && value != null) {
+      console.log("First Name ok");
+      return true
+    } else { 
+      parentElt.setAttribute('data-error-visible','true');
+      parentElt.appendChild(errorMess);
+      errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
+      errorMess.classList.add('error');
+      e.preventDefault();
+      return false 
+    }
+  }
 
-    //Si l'une des fonctions suivante ne retourne pas true
-    if ( !firstValidate() || 
-    !lastValidate() ||
-    !emailValidate() ||
-    !quantityValidate() ||
-    !locationValidate() 
-) 
-//On empêche le formulaire d'être validé
-{  e.preventDefault();  }
+
+  //Check last name validity function
+  function lastValidate(){
+    var value = lastName.value;
+    //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
+    if(value.length >= 2 && value != null) {
+      console.log("Last Name ok");
+      return true
+    } else { 
+      let parentElt = document.querySelector('#lastName');
+      parentElt.setAttribute('data-error-visible','true');
+      let errorMess = document.createElement('p');
+      parentElt.appendChild(errorMess);
+      errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
+      errorMess.classList.add('error');
+      e.preventDefault();
+      return false 
+    }
+  }
+
+
+  //Check mail validity function
+  function emailValidate(){
+    //Récupère la longueur du texte
+    var value = email.value.length;
+    //Récupère la valeur entrée dans l'input
+    var emailText = email.value;
+    //On vérifie que l'input est de type email, d'au moins 2 caractères et possède un @
+    if (email["type"]== "email" && value > 2 && emailText.includes("@")) {
+      console.log("Email ok");
+      return true 
+    } else { 
+      let parentElt = document.querySelector('#emailInput');
+      parentElt.setAttribute('data-error-visible','true');
+      let errorMess = document.createElement('p');
+      parentElt.appendChild(errorMess);
+      errorMess.textContent="Veuillez entrer une adresse mail valide.";
+      errorMess.classList.add('error');
+      e.preventDefault();
+      return false
+    }
+  }
+
+
+
+  //Check number validity function
+  function quantityValidate() {
+    var numberValue = quantity.value;
+    //On vérifie que l'input est de type nombre et contient au moins 1 caractère
+    if(quantity["type"]=="number" && numberValue.length > 0) {
+      return true
+    } else {  
+      let parentElt = document.querySelector('#numberInput');
+      parentElt.setAttribute('data-error-visible','true');
+      let errorMess = document.createElement('p');
+      parentElt.appendChild(errorMess);
+      errorMess.textContent="Veuillez entrer un chiffre.";
+      errorMess.classList.add('error');
+      return false
+    }
+  }
+
+
+  //Check at least one selected  button function
+  function locationValidate(){
+    //Pour chaque bouton radio
+    for (var i = 0; i<checkBtn.length; i++) {
+      //On vérifie si que le type est bien 'radio' et que le bouton est coché
+      if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
+        console.log('location ok');
+        return true;
+      } 
+    }
+    let parentElt = document.querySelector('#locationBtn');
+    let errorMess = document.createElement('p');
+    parentElt.appendChild(errorMess);
+    errorMess.textContent="Veuillez choisir une option.";
+    errorMess.classList.add('error');
+    e.preventDefault();
+    return false;
+  }
+
+    
+  //Check agreement box
+  function agreeValidate(){
+    let parentElt = document.querySelector('#agreeBtn');
+    let errorMess = document.createElement('p');
+    if(agreeBtn.checked) {
+      console.log('Conditions ok');
+      return true
+    } else { 
+      parentElt.appendChild(errorMess);
+      errorMess.textContent="Vous devez accepter les termes et conditions.";
+      errorMess.classList.add('error');
+      e.preventDefault();
+      return false
+      }
+  }
+
 
   //Exécute les fonctions précédentes
   firstValidate();
@@ -170,6 +171,5 @@ function validate(e){
   quantityValidate();
   locationValidate();
   agreeValidate();
-
-
+  
 }
