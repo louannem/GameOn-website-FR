@@ -49,7 +49,6 @@ submitBtn.addEventListener('click', function validate(e){
     if(firstValidate() && lastValidate() && emailValidate() && birthdateValidate() && quantityValidate() && locationValidate() && agreeValidate()) {
 
     //On cache le formulaire
-    console.log(document.getElementsByTagName('form'));
     var form = document.querySelector('form');
     form.style.display="none";
 
@@ -154,40 +153,40 @@ submitBtn.addEventListener('click', function validate(e){
   }
 
 
-function quantityValidate() {
-  var numberValue = quantity.value;
-  //On vérifie que l'input est de type nombre et contient au moins 1 caractère
-  if(quantity["type"]=="number" && numberValue.length > 0) {
-    return true
-  } else {  
-    let parentElt = document.querySelector('#numberInput');
-    parentElt.setAttribute('data-error-visible','true');
+  function quantityValidate() {
+    var numberValue = quantity.value;
+    //On vérifie que l'input est de type nombre et contient au moins 1 caractère
+    if(quantity["type"]=="number" && numberValue.length > 0) {
+      return true
+    } else {  
+      let parentElt = document.querySelector('#numberInput');
+      parentElt.setAttribute('data-error-visible','true');
+      let errorMess = document.createElement('p');
+      parentElt.appendChild(errorMess);
+      errorMess.textContent="Veuillez entrer un chiffre.";
+      errorMess.classList.add('error');
+      e.preventDefault();
+      return false
+    }
+  }
+
+  function locationValidate(){
+    //Pour chaque bouton radio
+    for (var i = 0; i<checkBtn.length; i++) {
+      //On vérifie si que le type est bien 'radio' et que le bouton est coché
+      if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
+        console.log('location ok');
+        return true;
+      } 
+    }
+    let parentElt = document.querySelector('#locationBtn');
     let errorMess = document.createElement('p');
     parentElt.appendChild(errorMess);
-    errorMess.textContent="Veuillez entrer un chiffre.";
     errorMess.classList.add('error');
+    errorMess.textContent="Vous devez choisir une option.";
     e.preventDefault();
     return false
-  }
-}
-
-function locationValidate(){
-  //Pour chaque bouton radio
-  for (var i = 0; i<checkBtn.length; i++) {
-    //On vérifie si que le type est bien 'radio' et que le bouton est coché
-    if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
-      console.log('location ok');
-      return true;
-    } 
-  }
-  let parentElt = document.querySelector('#locationBtn');
-  let errorMess = document.createElement('p');
-  parentElt.appendChild(errorMess);
-  errorMess.classList.add('error');
-  errorMess.textContent="Vous devez choisir une option.";
-  e.preventDefault();
-  return false
-  }
+    }
 
 
     
