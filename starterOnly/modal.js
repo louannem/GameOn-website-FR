@@ -42,13 +42,22 @@ const submitBtn = document.getElementById('btn-submit');
 
 
 //Validate function
-submitBtn.addEventListener('click', validate);
+submitBtn.addEventListener('click', function validate(e){
 
-function validate(e){
+  if(firstValidate() && lastValidate() && emailValidate() && quantityValidate() && locationValidate() && agreeValidate()) {
+    e.preventDefault();
+    //On cache le formulaire
+    console.log(document.getElementsByTagName('form'));
+    document.querySelector('form').style.display="none";
+    //Message de validation
+    let validation = document.getElementById('formValidation');
+    validation.style.display="inline";
+  }
+
   //Check first name validity function
   function firstValidate(){
     var value = firstName.value;
-    let parentElt = document.querySelector('.formData');
+    let parentElt = document.querySelector('#firstName');
     let errorMess = document.createElement('p');
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
     if(value.length >= 2 && value != null) {
@@ -65,7 +74,7 @@ function validate(e){
   }
 
 
-  //Check last name validity function
+
   function lastValidate(){
     var value = lastName.value;
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
@@ -85,66 +94,62 @@ function validate(e){
   }
 
 
-  //Check mail validity function
   function emailValidate(){
     //Récupère la longueur du texte
-    var value = email.value.length;
+    var value = email.value;
+    //Regex pour valider le mail
+    var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     //Récupère la valeur entrée dans l'input
-    var emailText = email.value;
-    //On vérifie que l'input est de type email, d'au moins 2 caractères et possède un @
-    if (email["type"]== "email" && value > 2 && emailText.includes("@")) {
-      console.log("Email ok");
-      return true 
-    } else { 
-      let parentElt = document.querySelector('#emailInput');
+    let parentElt = document.getElementById('emailInput');
+    let errorMess = document.createElement('p'); 
+
+    if(regex.test(value)){
+      return true
+    } else {
       parentElt.setAttribute('data-error-visible','true');
-      let errorMess = document.createElement('p');
       parentElt.appendChild(errorMess);
       errorMess.textContent="Veuillez entrer une adresse mail valide.";
       errorMess.classList.add('error');
       e.preventDefault();
-      return false
     }
   }
 
 
-
-  //Check number validity function
-  function quantityValidate() {
-    var numberValue = quantity.value;
-    //On vérifie que l'input est de type nombre et contient au moins 1 caractère
-    if(quantity["type"]=="number" && numberValue.length > 0) {
-      return true
-    } else {  
-      let parentElt = document.querySelector('#numberInput');
-      parentElt.setAttribute('data-error-visible','true');
-      let errorMess = document.createElement('p');
-      parentElt.appendChild(errorMess);
-      errorMess.textContent="Veuillez entrer un chiffre.";
-      errorMess.classList.add('error');
-      return false
-    }
-  }
-
-
-  //Check at least one selected  button function
-  function locationValidate(){
-    //Pour chaque bouton radio
-    for (var i = 0; i<checkBtn.length; i++) {
-      //On vérifie si que le type est bien 'radio' et que le bouton est coché
-      if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
-        console.log('location ok');
-        return true;
-      } 
-    }
-    let parentElt = document.querySelector('#locationBtn');
+function quantityValidate() {
+  var numberValue = quantity.value;
+  //On vérifie que l'input est de type nombre et contient au moins 1 caractère
+  if(quantity["type"]=="number" && numberValue.length > 0) {
+    return true
+  } else {  
+    let parentElt = document.querySelector('#numberInput');
+    parentElt.setAttribute('data-error-visible','true');
     let errorMess = document.createElement('p');
     parentElt.appendChild(errorMess);
-    errorMess.textContent="Veuillez choisir une option.";
+    errorMess.textContent="Veuillez entrer un chiffre.";
     errorMess.classList.add('error');
     e.preventDefault();
-    return false;
+    return false
   }
+}
+
+function locationValidate(){
+  //Pour chaque bouton radio
+  for (var i = 0; i<checkBtn.length; i++) {
+    //On vérifie si que le type est bien 'radio' et que le bouton est coché
+    if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
+      console.log('location ok');
+      return true;
+    } 
+  }
+  let parentElt = document.querySelector('#locationBtn');
+  let errorMess = document.createElement('p');
+  parentElt.appendChild(errorMess);
+  errorMess.classList.add('error');
+  errorMess.textContent="Vous devez accepter les termes et conditions.";
+  e.preventDefault();
+  return false
+  }
+
 
     
   //Check agreement box
@@ -165,11 +170,10 @@ function validate(e){
 
 
   //Exécute les fonctions précédentes
-  firstValidate();
   lastValidate();
   emailValidate();
   quantityValidate();
   locationValidate();
   agreeValidate();
-  
-}
+
+});
