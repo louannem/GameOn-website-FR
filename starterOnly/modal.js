@@ -34,6 +34,7 @@ function closeModal() {
 let firstName = document.getElementById('first');
 let lastName = document.getElementById('last');
 let email = document.getElementById('email');
+let birthdate = document.getElementById('birthdate');
 let quantity = document.getElementById('quantity');
 let checkBtn = document.getElementsByName('location');
 let agreeBtn = document.getElementById('checkbox1');
@@ -44,15 +45,31 @@ const submitBtn = document.getElementById('btn-submit');
 //Validate function
 submitBtn.addEventListener('click', function validate(e){
 
-  if(firstValidate() && lastValidate() && emailValidate() && quantityValidate() && locationValidate() && agreeValidate()) {
-    e.preventDefault();
+    //Si toutes les entrées du formulaire sont correctes
+    if(firstValidate() && lastValidate() && emailValidate() && birthdateValidate() && quantityValidate() && locationValidate() && agreeValidate()) {
+
     //On cache le formulaire
     console.log(document.getElementsByTagName('form'));
-    document.querySelector('form').style.display="none";
-    //Message de validation
-    let validation = document.getElementById('formValidation');
-    validation.style.display="inline";
+    var form = document.querySelector('form');
+    form.style.display="none";
+
+    //Event listener pour valider le formulaire
+    form.addEventListener('submit', function before_submit(e){
+      //Message de validation
+      let validation = document.getElementById('formValidation');
+      validation.style.display="inline";
+      //Fonction pour afficher le message une certaine durée
+      setTimeout(function wait(){
+        // Attends 3 secondes avant de valider le formulaire
+        form.submit();
+        console.log('Formualire validé !')
+      },3000);
+    
+      // Empêche le formulaire d'être validé
+      e.preventDefault();
+    });  
   }
+
 
   //Check first name validity function
   function firstValidate(){
@@ -72,6 +89,7 @@ submitBtn.addEventListener('click', function validate(e){
       return false 
     }
   }
+
 
 
 
@@ -111,6 +129,27 @@ submitBtn.addEventListener('click', function validate(e){
       errorMess.textContent="Veuillez entrer une adresse mail valide.";
       errorMess.classList.add('error');
       e.preventDefault();
+      return false
+    }
+  }
+
+  function birthdateValidate(){
+    var value = birthdate.value;
+    var regex = new RegExp(".*[0-9].*");
+    let parentElt = document.getElementById('birthdateInput');
+    let errorMess = document.createElement('p');
+
+
+    if (regex.test(value)){
+      return true
+    } else {
+      console.log(value);
+      parentElt.setAttribute('data-error-visible','true');
+      parentElt.appendChild(errorMess);
+      errorMess.textContent="Veuillez entrer une date de naissance valide.";
+      errorMess.classList.add('error');
+      e.preventDefault();
+      return false;
     }
   }
 
@@ -145,7 +184,7 @@ function locationValidate(){
   let errorMess = document.createElement('p');
   parentElt.appendChild(errorMess);
   errorMess.classList.add('error');
-  errorMess.textContent="Vous devez accepter les termes et conditions.";
+  errorMess.textContent="Vous devez choisir une option.";
   e.preventDefault();
   return false
   }
@@ -168,12 +207,12 @@ function locationValidate(){
       }
   }
 
-
-  //Exécute les fonctions précédentes
   lastValidate();
   emailValidate();
-  quantityValidate();
+  birthdateValidate()
   locationValidate();
+  quantityValidate();
   agreeValidate();
+
 
 });
