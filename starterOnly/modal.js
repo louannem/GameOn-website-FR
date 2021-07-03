@@ -41,36 +41,7 @@ let agreeBtn = document.getElementById('checkbox1');
 const submitBtn = document.getElementById('btn-submit');
 
 
-
-//Validate function
-submitBtn.addEventListener('click', function validate(e){
-
-    //Si toutes les entrées du formulaire sont correctes
-    if(firstValidate() && lastValidate() && emailValidate() && birthdateValidate() && quantityValidate() && locationValidate() && agreeValidate()) {
-
-    //On cache le formulaire
-    var form = document.querySelector('form');
-    form.style.display="none";
-
-    //Event listener pour valider le formulaire
-    form.addEventListener('submit', function before_submit(e){
-      //Message de validation
-      let validation = document.getElementById('formValidation');
-      validation.style.display="inline";
-      //Fonction pour afficher le message une certaine durée
-      setTimeout(function wait(){
-        // Attends 3 secondes avant de valider le formulaire
-        form.submit();
-        console.log('Formualire validé !')
-      },3000);
-    
-      // Empêche le formulaire d'être validé
-      e.preventDefault();
-    });  
-  }
-
-
-  //Check first name validity function
+ //Check first name validity function
   function firstValidate(){
     var value = firstName.value;
     let parentElt = document.querySelector('#firstName');
@@ -84,13 +55,9 @@ submitBtn.addEventListener('click', function validate(e){
       parentElt.appendChild(errorMess);
       errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
       errorMess.classList.add('error');
-      e.preventDefault();
       return false 
     }
   }
-
-
-
 
   function lastValidate(){
     var value = lastName.value;
@@ -105,11 +72,9 @@ submitBtn.addEventListener('click', function validate(e){
       parentElt.appendChild(errorMess);
       errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
       errorMess.classList.add('error');
-      e.preventDefault();
       return false 
     }
   }
-
 
   function emailValidate(){
     //Récupère la longueur du texte
@@ -127,7 +92,6 @@ submitBtn.addEventListener('click', function validate(e){
       parentElt.appendChild(errorMess);
       errorMess.textContent="Veuillez entrer une adresse mail valide.";
       errorMess.classList.add('error');
-      e.preventDefault();
       return false
     }
   }
@@ -147,11 +111,9 @@ submitBtn.addEventListener('click', function validate(e){
       parentElt.appendChild(errorMess);
       errorMess.textContent="Veuillez entrer une date de naissance valide.";
       errorMess.classList.add('error');
-      e.preventDefault();
       return false;
     }
   }
-
 
   function quantityValidate() {
     var numberValue = quantity.value;
@@ -165,7 +127,6 @@ submitBtn.addEventListener('click', function validate(e){
       parentElt.appendChild(errorMess);
       errorMess.textContent="Veuillez entrer un chiffre.";
       errorMess.classList.add('error');
-      e.preventDefault();
       return false
     }
   }
@@ -184,11 +145,8 @@ submitBtn.addEventListener('click', function validate(e){
     parentElt.appendChild(errorMess);
     errorMess.classList.add('error');
     errorMess.textContent="Vous devez choisir une option.";
-    e.preventDefault();
     return false
-    }
-
-
+  }
     
   //Check agreement box
   function agreeValidate(){
@@ -201,11 +159,15 @@ submitBtn.addEventListener('click', function validate(e){
       parentElt.appendChild(errorMess);
       errorMess.textContent="Vous devez accepter les termes et conditions.";
       errorMess.classList.add('error');
-      e.preventDefault();
       return false
       }
   }
 
+//Validate function
+function validate(e){
+  e.preventDefault();
+
+  firstValidate();
   lastValidate();
   emailValidate();
   birthdateValidate()
@@ -213,5 +175,27 @@ submitBtn.addEventListener('click', function validate(e){
   quantityValidate();
   agreeValidate();
 
+    //Si toutes les entrées du formulaire sont correctes
+    if(firstValidate() && lastValidate() && emailValidate() && birthdateValidate() && quantityValidate() && locationValidate() && agreeValidate()) {
+    //On cache le formulaire
+    var form = document.querySelector('form');
+    form.style.display="none";
 
-});
+    //Event listener pour valider le formulaire onclick
+    form.addEventListener('click', function before_submit(event){
+      //Message de validation
+      let validation = document.getElementById('formValidation');
+      validation.style.display="inline";
+      //Fonction pour afficher le message une certaine durée
+      setTimeout(function wait(){
+        // Attends 3 secondes avant de valider le formulaire
+        form.submit();
+      },3000);
+    
+      // Empêche le formulaire d'être validé
+      event.preventDefault();
+    });  
+  }
+}
+
+submitBtn.addEventListener('click', validate);
