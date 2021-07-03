@@ -31,30 +31,81 @@ function closeModal() {
 
 
 //Variables pour récupérer les valeurs des champs
+  //Variables pour le prénom
 let firstName = document.getElementById('first');
+let parentFirst = document.querySelector('#firstName');
+let errorFirst = document.createElement('p');
+parentFirst.appendChild(errorFirst);
+errorFirst.textContent="Veuillez entrer 2 caractères ou plus.";
+errorFirst.style.display="none";
+
+  //Variables pour le nom
 let lastName = document.getElementById('last');
+let parentLast = document.querySelector('#lastName');
+let errorLast = document.createElement('p');
+parentLast.appendChild(errorLast);
+errorLast.textContent="Veuillez entrer 2 caractères ou plus.";
+errorLast.style.display="none";
+
+  //Variables pour l'email
 let email = document.getElementById('email');
+let parentEmail = document.querySelector('#emailInput');
+let errorEmail = document.createElement('p');
+parentEmail.appendChild(errorEmail);
+errorEmail.textContent="Veuillez entrer une adresse mail valide.";
+errorEmail.style.display="none";
+
+
+  //Variables pour la date de naissance
 let birthdate = document.getElementById('birthdate');
+let parentBirth = document.getElementById('birthdateInput');
+let errorBirth = document.createElement('p');
+parentBirth.appendChild(errorBirth);
+errorBirth.textContent="Veuillez entrer une date de naissance valide.";
+errorBirth.style.display="none";
+
+  //Variables pour le nombre de tournois
 let quantity = document.getElementById('quantity');
+let parentQuantity = document.getElementById('numberInput');
+let errorQuantity = document.createElement('p');
+parentQuantity.appendChild(errorQuantity);
+errorQuantity.textContent="Veuillez entrer un nombre.";
+errorQuantity.style.display="none";
+
+
+  //Variables pour le lieu des tournois
 let checkBtn = document.getElementsByName('location');
+let parentLocation = document.getElementById('locationBtn');
+let errorLocation = document.createElement('p');
+parentLocation.appendChild(errorLocation);
+errorLocation.textContent="Veuillez choisir une option.";
+errorLocation.style.display="none";
+
+  //Variables pour les Termes & Conditions
 let agreeBtn = document.getElementById('checkbox1');
+let parentAgree = document.getElementById('agreeBtn');
+let errorAgree = document.createElement('p');
+parentAgree.appendChild(errorAgree);
+errorAgree.textContent="Vous devez accepter les termes et conditions.";
+errorAgree.style.display="none";
+
+//Bouton de validation du formulaire
 const submitBtn = document.getElementById('btn-submit');
 
 
  //Check first name validity function
   function firstValidate(){
     var value = firstName.value;
-    let parentElt = document.querySelector('#firstName');
-    let errorMess = document.createElement('p');
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
     if(value.length >= 2 && value != null) {
       console.log("First Name ok");
+      errorLast.style.display="none";
+      parentFirst.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
-      parentElt.setAttribute('data-error-visible','true');
-      parentElt.appendChild(errorMess);
-      errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
-      errorMess.classList.add('error');
+      parentFirst.setAttribute('data-error-visible','true');
+      errorFirst.classList.add('error');
+      errorFirst.style.display="block";
       return false 
     }
   }
@@ -64,14 +115,13 @@ const submitBtn = document.getElementById('btn-submit');
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
     if(value.length >= 2 && value != null) {
       console.log("Last Name ok");
+      errorLast.style.display="none";
+      parentLast.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
-      let parentElt = document.querySelector('#lastName');
-      parentElt.setAttribute('data-error-visible','true');
-      let errorMess = document.createElement('p');
-      parentElt.appendChild(errorMess);
-      errorMess.textContent="Veuillez entrer 2 caractères ou plus.";
-      errorMess.classList.add('error');
+      parentLast.setAttribute('data-error-visible','true');
+      errorLast.classList.add('error');
+      errorLast.style.display="block";
       return false 
     }
   }
@@ -81,17 +131,15 @@ const submitBtn = document.getElementById('btn-submit');
     var value = email.value;
     //Regex pour valider le mail
     var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    //Récupère la valeur entrée dans l'input
-    let parentElt = document.getElementById('emailInput');
-    let errorMess = document.createElement('p'); 
 
     if(regex.test(value)){
+      errorEmail.style.display="none";
+      parentEmail.removeAttribute('data-error-visible', 'true');
       return true
     } else {
-      parentElt.setAttribute('data-error-visible','true');
-      parentElt.appendChild(errorMess);
-      errorMess.textContent="Veuillez entrer une adresse mail valide.";
-      errorMess.classList.add('error');
+      parentEmail.setAttribute('data-error-visible','true');
+      errorEmail.classList.add('error');
+      errorEmail.style.display="block";
       return false
     }
   }
@@ -99,18 +147,16 @@ const submitBtn = document.getElementById('btn-submit');
   function birthdateValidate(){
     var value = birthdate.value;
     var regex = new RegExp(".*[0-9].*");
-    let parentElt = document.getElementById('birthdateInput');
-    let errorMess = document.createElement('p');
 
 
     if (regex.test(value)){
+      parentBirth.removeAttribute('data-error-visible');
+      errorBirth.style.display="none";
       return true
     } else {
-      console.log(value);
-      parentElt.setAttribute('data-error-visible','true');
-      parentElt.appendChild(errorMess);
-      errorMess.textContent="Veuillez entrer une date de naissance valide.";
-      errorMess.classList.add('error');
+      parentBirth.setAttribute('data-error-visible','true');
+      errorBirth.classList.add('error');
+      errorBirth.style.display="block";
       return false;
     }
   }
@@ -119,14 +165,13 @@ const submitBtn = document.getElementById('btn-submit');
     var numberValue = quantity.value;
     //On vérifie que l'input est de type nombre et contient au moins 1 caractère
     if(quantity["type"]=="number" && numberValue.length > 0) {
+      parentQuantity.removeAttribute('data-error-visible');
+      errorQuantity.style.display="none";
       return true
     } else {  
-      let parentElt = document.querySelector('#numberInput');
-      parentElt.setAttribute('data-error-visible','true');
-      let errorMess = document.createElement('p');
-      parentElt.appendChild(errorMess);
-      errorMess.textContent="Veuillez entrer un chiffre.";
-      errorMess.classList.add('error');
+      parentQuantity.setAttribute('data-error-visible','true');
+      errorQuantity.classList.add('error');
+      errorQuantity.style.display="block";
       return false
     }
   }
@@ -136,29 +181,23 @@ const submitBtn = document.getElementById('btn-submit');
     for (var i = 0; i<checkBtn.length; i++) {
       //On vérifie si que le type est bien 'radio' et que le bouton est coché
       if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
-        console.log('location ok');
+        errorLocation.style.display="none";
         return true;
       } 
     }
-    let parentElt = document.querySelector('#locationBtn');
-    let errorMess = document.createElement('p');
-    parentElt.appendChild(errorMess);
-    errorMess.classList.add('error');
-    errorMess.textContent="Vous devez choisir une option.";
+    errorLocation.classList.add('error');
+    errorLocation.style.display="block";
     return false
   }
     
   //Check agreement box
   function agreeValidate(){
-    let parentElt = document.querySelector('#agreeBtn');
-    let errorMess = document.createElement('p');
     if(agreeBtn.checked) {
-      console.log('Conditions ok');
+      errorAgree.style.display="none";
       return true
     } else { 
-      parentElt.appendChild(errorMess);
-      errorMess.textContent="Vous devez accepter les termes et conditions.";
-      errorMess.classList.add('error');
+      errorAgree.classList.add('error');
+      errorAgree.style.display="block";
       return false
       }
   }
