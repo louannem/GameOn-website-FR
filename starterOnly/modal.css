@@ -73,18 +73,6 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
-  .hero-headline { font-size: 3.7rem!important;}
-  .topnav {
-    margin: 0 5%!important;
-    padding: 5% 0;
-  }
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
 
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
@@ -98,22 +86,8 @@ img {
     text-align: left;
   }
 
-  .content {
-    margin: 0px!important;
-    min-height: 100vh;
-    min-width: 100%;
-}
 
 
-
- @media screen and (max-width: 540px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-} 
 
 main {
   font-size: 130%;
@@ -153,7 +127,10 @@ main {
 
 /* Modal form */
 
+/* Message de validation du formulaire */
 #formValidation { display: none} 
+#formValidation { text-align: center;}
+.close-btn { margin-top: 50px;}
 
 .button {
   background: #fe142f;
@@ -187,8 +164,8 @@ main {
 
 .content {
   display: flex; justify-content: center; align-items: center;
-  min-height: 95%;
-  margin: 5% auto;
+  min-height: 100%;
+  margin: 0% auto;
   width: 100%;
   max-width: 500px;
   animation-name: modalopen;
@@ -433,8 +410,6 @@ input[data-error]::after {
   font-size: 16px;
 }
 
-#formValidation { text-align: center;}
-.close-btn { margin-top: 50px;}
 
 .hero-section {
   min-height: 93vh;
@@ -509,6 +484,34 @@ footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
+}
+
+
+@media screen and (max-width: 540px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+    margin-top: -15px;
+  }
+} 
+
+@media screen and (max-width: 768px) {
+  .topnav {
+    margin: 0 5%!important;
+    padding: 5% 0;
+  }
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+
+  .content {
+    margin: 0px!important;
+    min-height: 100vh;
+    min-width: 100%;
+  }
 }
 
 @media screen and (min-width: 800px){
