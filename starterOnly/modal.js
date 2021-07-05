@@ -22,7 +22,7 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// close modal event
+// close modal events
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 closeBtn2.forEach((btn2) => btn2.addEventListener("click", closeModal2));
 
@@ -30,6 +30,7 @@ closeBtn2.forEach((btn2) => btn2.addEventListener("click", closeModal2));
 function closeModal() {
   modalbg.style.display= "none";
 }
+// second function to close modal form (in validation message)
 function closeModal2() {
   modalbg.style.display="none";
 }
@@ -115,6 +116,7 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
+   //Check last name validity function
   function lastValidate(){
     var value = lastName.value;
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
@@ -131,6 +133,7 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
+   //Check email validity function
   function emailValidate(){
     //Récupère la longueur du texte
     var value = email.value;
@@ -149,6 +152,7 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
+   //Check birthdate validity function
   function birthdateValidate(){
     var value = birthdate.value;
     var regex = new RegExp(".*[0-9].*");
@@ -166,6 +170,7 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
+   //Check number validity function
   function quantityValidate() {
     var numberValue = quantity.value;
     //On vérifie que l'input est de type nombre et contient au moins 1 caractère
@@ -181,6 +186,7 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
+   //Check checked location function
   function locationValidate(){
     //Pour chaque bouton radio
     for (var i = 0; i<checkBtn.length; i++) {
@@ -209,8 +215,10 @@ const submitBtn = document.getElementById('btn-submit');
 
 //Validate function
 function validate(e){
+  //Empêche le formulaire de s'envoyer
   e.preventDefault();
 
+  //Exécute les fonctions qui valident les champs
   firstValidate();
   lastValidate();
   emailValidate();
@@ -236,10 +244,11 @@ function validate(e){
         form.submit();
       },3000);
     
-      // Empêche le formulaire d'être validé
+      // Empêche le formulaire d'être validé si tout ne retourne pas true
       event.preventDefault();
     });  
   }
 }
 
+//En cliquant sur le bouton, la fonction validate s'exécute
 submitBtn.addEventListener('click', validate);
