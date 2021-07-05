@@ -174,6 +174,7 @@ main {
 .content {
   margin: 5% auto;
   width: 100%;
+  height: 100%;
   max-width: 500px;
   animation-name: modalopen;
   animation-duration: var(--modal-duration);
@@ -189,6 +190,15 @@ main {
   padding: 15px 8%;
   margin: 15px auto;
 }
+
+form { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form > div { width: 100%;}
+
 
 label {
   font-family: var(--font-default);
@@ -406,6 +416,11 @@ input[data-error]::after {
   font-weight: normal;
   font-size: 16px;
 }
+
+.modal-body { display: flex; justify-content: center; align-items: center; height: 95%; overflow: scroll;}
+#formValidation { text-align: center;}
+.close-btn { margin-top: 50px;}
+
 .hero-section {
   min-height: 93vh;
   border-radius: 10px;
@@ -480,11 +495,24 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
+
+@media screen and (min-width: 800px){
+  .hero-content {
+    display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  }
+
+}
+
 @media screen and (max-width: 800px) {
   .topnav { margin: 5%}
   .topnav .icon { color: #fe142f}
   .header-logo img { height: 20px}
-  .content { margin: 0; height: 100vh;}
+  .content { margin: 60px 0px; height: 100vh;}
+  label { font-size: 15px; margin-top: 5px;}
+  .bground { background-color: transparent;}
 
   .hero-section {
     display: block;
@@ -527,16 +555,6 @@ footer {
     text-align: center;
   }
 
-  form { 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  form > div { width: 100%;}
-
-  .modal-body { display: flex; justify-content: center; align-items: center; height: 100%;}
-  #formValidation { text-align: center;}
 }
 
 @keyframes modalopen {
