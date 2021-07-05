@@ -99,7 +99,7 @@ const submitBtn = document.getElementById('btn-submit');
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
     if(value.length >= 2 && value != null) {
       console.log("First Name ok");
-      errorLast.style.display="none";
+      errorFirst.style.display="none";
       parentFirst.removeAttribute('data-error-visible', 'true');
       return true
     } else { 

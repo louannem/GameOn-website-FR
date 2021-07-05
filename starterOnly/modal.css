@@ -481,6 +481,11 @@ footer {
   margin: 0 20px;
 }
 @media screen and (max-width: 800px) {
+  .topnav { margin: 5%}
+  .topnav .icon { color: #fe142f}
+  .header-logo img { height: 20px}
+  .content { margin: 0; height: 100vh;}
+
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -488,7 +493,9 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 0px;
+    min-width: 0px;
+    max-width: 424px!important;
   }
   .hero-content::after {
     content: unset;
@@ -497,12 +504,14 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
+    font-size: 2.7rem;
     white-space: normal;
+    font-weight: 700;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+    margin-top: 30px;
   }
   .hero-img img {
     border-radius: 10px;
@@ -514,9 +523,20 @@ footer {
     padding: 12px 35px;
   }
   .copyrights {
-    margin-top: 50px;
+    margin-top: 0px;
     text-align: center;
   }
+
+  form { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  form > div { width: 100%;}
+
+  .modal-body { display: flex; justify-content: center; align-items: center; height: 100%;}
+  #formValidation { text-align: center;}
 }
 
 @keyframes modalopen {
