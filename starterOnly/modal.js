@@ -74,12 +74,16 @@ let parentAgree = agreeBtn.parentElement;
 const submitBtn = document.getElementById('btn-submit');
 
 
- //Check first name validity function
+
+ /**
+  * Check first name validity function
+  * @returns 
+  */
   function firstValidate(){
-    var value = firstName.value;
+    /** @type{string}     */
+    let value = firstName.value;
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
     if(value.length >= 2 && value != null) {
-      console.log("First Name ok");
       parentFirst.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
@@ -89,9 +93,14 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
-   //Check last name validity function
+
+   /**
+    * Check last name validity function
+    * @returns 
+    */
   function lastValidate(){
-    var value = lastName.value;
+    /** @type{string}     */
+    let value = lastName.value;
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
     if(value.length >= 2 && value != null) {
       console.log("Last Name ok");
@@ -106,10 +115,16 @@ const submitBtn = document.getElementById('btn-submit');
 
    //Check email validity function
   function emailValidate(){
-    //Récupère la longueur du texte
-    var value = email.value;
-    //Regex pour valider le mail
-    var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    /**
+     * Récupère la longueur du texte
+     * @type {string}
+     */
+    let value = email.value;
+    /**
+     * Regex pour valider le mail
+     * @type {RegExp}
+     */
+    let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if(regex.test(value)){
       parentEmail.removeAttribute('data-error-visible', 'true');
@@ -121,10 +136,22 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
-   //Check birthdate validity function
+  
+   /**
+    * Check birthdate validity function
+    * @returns 
+    */
   function birthdateValidate(){
-    var value = birthdate.value;
-    var regex = new RegExp(".*[0-9].*");
+    /**
+     * Récupère la valeur de la date entrée 
+     * @type {number}
+     */
+    let value = birthdate.value;
+    /**
+     * Regex pour valider la date de naissance
+     * @type {RegExp}
+     */
+    let regex = new RegExp(".*[0-9].*");
 
 
     if (regex.test(value)){
@@ -137,9 +164,18 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
-   //Check number validity function
+
+   /**
+    * Check number validity function
+    * @returns 
+    */
   function quantityValidate() {
+    /**
+     * Récupère la valeur entrée
+     * @type {number}
+     */
     let numberValue = quantity.value;
+
     //On vérifie que l'input est de type nombre et contient au moins 1 caractère
     if(quantity["type"]=="number" && numberValue.length > 0) {
       parentQuantity.removeAttribute('data-error-visible');
@@ -151,12 +187,21 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
-   //Check checked location function
+
+
+   /**
+    * Check checked location function
+    * @returns 
+    */
   function locationValidate(){
     //Pour chaque bouton radio
-    for (var i = 0; i<checkBtn.length; i++) {
+    for (let i = 0; i<checkBtn.length; i++) {
       //On vérifie si que le type est bien 'radio' et que le bouton est coché
       if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
+        /**
+         * Récupère le parent du bouton radio coché
+         * @type {HTMLElement}
+         */
         let parentLocation = checkBtn[i].parentElement;
         parentLocation.removeAttribute('data-error-visible', 'true');
         console.log(parentLocation)
@@ -169,8 +214,12 @@ const submitBtn = document.getElementById('btn-submit');
     }
     return false
   }
+
     
-  //Check agreement box
+  /**
+   * Check agreement box
+   * @returns 
+   */
   function agreeValidate(){
     if(agreeBtn.checked) {
       parentAgree.removeAttribute('data-error-visible', 'true');
@@ -182,14 +231,17 @@ const submitBtn = document.getElementById('btn-submit');
       }
   }
 
-//Validate function
+
+/**
+ * Validate function to send the form
+ * @param {event} e - event object
+ */
 function validate(e){
   //Empêche le formulaire de s'envoyer
   e.preventDefault();
 
   //Exécute les fonctions qui valident les champs
- let firstValidation = firstValidate();
- console.log(firstValidation);
+  let firstValidation = firstValidate();
   let lastValidation = lastValidate();
   let emailValidation = emailValidate();
   let birthdateValidation = birthdateValidate()
