@@ -1,5 +1,5 @@
 function editNav() {
-  var x = document.getElementById("myTopnav");
+  let x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -39,61 +39,36 @@ function closeModal2() {
 //Variables pour récupérer les valeurs des champs
   //Variables pour le prénom
 let firstName = document.getElementById('first');
-let parentFirst = document.querySelector('#firstName');
-let errorFirst = document.createElement('p');
-parentFirst.appendChild(errorFirst);
-errorFirst.textContent="Veuillez entrer 2 caractères ou plus.";
-errorFirst.style.display="none";
+let parentFirst = firstName.parentElement;
+
 
   //Variables pour le nom
 let lastName = document.getElementById('last');
-let parentLast = document.querySelector('#lastName');
-let errorLast = document.createElement('p');
-parentLast.appendChild(errorLast);
-errorLast.textContent="Veuillez entrer 2 caractères ou plus.";
-errorLast.style.display="none";
+let parentLast = lastName.parentElement;
 
   //Variables pour l'email
 let email = document.getElementById('email');
-let parentEmail = document.querySelector('#emailInput');
-let errorEmail = document.createElement('p');
-parentEmail.appendChild(errorEmail);
-errorEmail.textContent="Veuillez entrer une adresse mail valide.";
-errorEmail.style.display="none";
+let parentEmail = email.parentElement;
 
 
   //Variables pour la date de naissance
 let birthdate = document.getElementById('birthdate');
-let parentBirth = document.getElementById('birthdateInput');
-let errorBirth = document.createElement('p');
-parentBirth.appendChild(errorBirth);
-errorBirth.textContent="Veuillez entrer une date de naissance valide.";
-errorBirth.style.display="none";
+let parentBirth = birthdate.parentElement;
+
 
   //Variables pour le nombre de tournois
 let quantity = document.getElementById('quantity');
-let parentQuantity = document.getElementById('numberInput');
-let errorQuantity = document.createElement('p');
-parentQuantity.appendChild(errorQuantity);
-errorQuantity.textContent="Veuillez entrer un nombre.";
-errorQuantity.style.display="none";
+let parentQuantity = quantity.parentElement;
 
 
   //Variables pour le lieu des tournois
 let checkBtn = document.getElementsByName('location');
-let parentLocation = document.getElementById('locationBtn');
-let errorLocation = document.createElement('p');
-parentLocation.appendChild(errorLocation);
-errorLocation.textContent="Veuillez choisir une option.";
-errorLocation.style.display="none";
+
 
   //Variables pour les Termes & Conditions
 let agreeBtn = document.getElementById('checkbox1');
-let parentAgree = document.getElementById('agreeBtn');
-let errorAgree = document.createElement('p');
-parentAgree.appendChild(errorAgree);
-errorAgree.textContent="Vous devez accepter les termes et conditions.";
-errorAgree.style.display="none";
+let parentAgree = agreeBtn.parentElement;
+
 
 //Bouton de validation du formulaire
 const submitBtn = document.getElementById('btn-submit');
@@ -105,13 +80,11 @@ const submitBtn = document.getElementById('btn-submit');
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
     if(value.length >= 2 && value != null) {
       console.log("First Name ok");
-      errorFirst.style.display="none";
       parentFirst.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
       parentFirst.setAttribute('data-error-visible','true');
-      errorFirst.classList.add('error');
-      errorFirst.style.display="block";
+      parentFirst.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus.');
       return false 
     }
   }
@@ -122,13 +95,11 @@ const submitBtn = document.getElementById('btn-submit');
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
     if(value.length >= 2 && value != null) {
       console.log("Last Name ok");
-      errorLast.style.display="none";
       parentLast.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
       parentLast.setAttribute('data-error-visible','true');
-      errorLast.classList.add('error');
-      errorLast.style.display="block";
+      parentLast.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus.');
       return false 
     }
   }
@@ -141,13 +112,11 @@ const submitBtn = document.getElementById('btn-submit');
     var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if(regex.test(value)){
-      errorEmail.style.display="none";
       parentEmail.removeAttribute('data-error-visible', 'true');
       return true
     } else {
       parentEmail.setAttribute('data-error-visible','true');
-      errorEmail.classList.add('error');
-      errorEmail.style.display="block";
+      parentEmail.setAttribute('data-error', 'Veuillez entrer une adresse mail valide.');
       return false
     }
   }
@@ -160,28 +129,24 @@ const submitBtn = document.getElementById('btn-submit');
 
     if (regex.test(value)){
       parentBirth.removeAttribute('data-error-visible');
-      errorBirth.style.display="none";
       return true
     } else {
       parentBirth.setAttribute('data-error-visible','true');
-      errorBirth.classList.add('error');
-      errorBirth.style.display="block";
+      parentBirth.setAttribute('data-error', 'Veuillez entrer une date de naissance valide.')
       return false;
     }
   }
 
    //Check number validity function
   function quantityValidate() {
-    var numberValue = quantity.value;
+    let numberValue = quantity.value;
     //On vérifie que l'input est de type nombre et contient au moins 1 caractère
     if(quantity["type"]=="number" && numberValue.length > 0) {
       parentQuantity.removeAttribute('data-error-visible');
-      errorQuantity.style.display="none";
       return true
     } else {  
       parentQuantity.setAttribute('data-error-visible','true');
-      errorQuantity.classList.add('error');
-      errorQuantity.style.display="block";
+      parentQuantity.setAttribute('data-error', 'Veuillez entrer un nombre.')
       return false
     }
   }
@@ -192,23 +157,27 @@ const submitBtn = document.getElementById('btn-submit');
     for (var i = 0; i<checkBtn.length; i++) {
       //On vérifie si que le type est bien 'radio' et que le bouton est coché
       if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
-        errorLocation.style.display="none";
+        let parentLocation = checkBtn[i].parentElement;
+        parentLocation.removeAttribute('data-error-visible', 'true');
+        console.log(parentLocation)
         return true;
-      } 
+      } else {
+        let parentLocation = checkBtn[i].parentElement;
+        parentLocation.setAttribute('data-error-visible', 'true');
+        parentLocation.setAttribute('data-error', 'Veuillez choisir une option.')
+      }
     }
-    errorLocation.classList.add('error');
-    errorLocation.style.display="block";
     return false
   }
     
   //Check agreement box
   function agreeValidate(){
     if(agreeBtn.checked) {
-      errorAgree.style.display="none";
+      parentAgree.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
-      errorAgree.classList.add('error');
-      errorAgree.style.display="block";
+      parentAgree.setAttribute('data-error-visible', 'true');
+      parentAgree.setAttribute('data-error', 'Vous devez accepter les termes et conditions.');
       return false
       }
   }
@@ -242,7 +211,7 @@ function validate(e){
       setTimeout(function wait(){
         // Attends 3 secondes avant de valider le formulaire
         form.submit();
-      },3000);
+      },1000);
     
       // Empêche le formulaire d'être validé si tout ne retourne pas true
       event.preventDefault();
