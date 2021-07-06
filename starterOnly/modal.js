@@ -188,18 +188,27 @@ function validate(e){
   e.preventDefault();
 
   //Exécute les fonctions qui valident les champs
-  firstValidate();
-  lastValidate();
-  emailValidate();
-  birthdateValidate()
-  locationValidate();
-  quantityValidate();
-  agreeValidate();
+ let firstValidation = firstValidate();
+ console.log(firstValidation);
+  let lastValidation = lastValidate();
+  let emailValidation = emailValidate();
+  let birthdateValidation = birthdateValidate()
+  let locationValidation = locationValidate();
+  let quantityValidation= quantityValidate();
+  let agreeValidation = agreeValidate();
 
     //Si toutes les entrées du formulaire sont correctes
-    if(firstValidate() && lastValidate() && emailValidate() && birthdateValidate() && quantityValidate() && locationValidate() && agreeValidate()) {
+    if(
+      firstValidation===true && 
+      lastValidation===true && 
+      emailValidation===true && 
+      birthdateValidation===true && 
+      quantityValidation===true && 
+      locationValidation===true && 
+      agreeValidation===true) {
+        
     //On cache le formulaire
-    var form = document.querySelector('form');
+    let form = document.querySelector('form');
     form.style.display="none";
 
     //Event listener pour valider le formulaire onclick
