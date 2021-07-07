@@ -84,13 +84,15 @@ const submitBtn = document.getElementById('btn-submit');
   * @returns {boolean} Retourne true ou false selon la validation du champ
   */
   function firstValidate(){
-    /** @type{string}     */
-    let value = firstName.value;
+    //Récupère la valeur de l'input sans espace blanc
+    let value = firstName.value.trim();
+
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
     if(value.length >= 2 && value != null) {
       parentFirst.removeAttribute('data-error-visible', 'true');
       return true
-    } else { 
+    }     
+    else { 
       parentFirst.setAttribute('data-error-visible','true');
       parentFirst.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus.');
       return false 
@@ -103,11 +105,10 @@ const submitBtn = document.getElementById('btn-submit');
     * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function lastValidate(){
-    /** @type{string}     */
-    let value = lastName.value;
+    //Récupère la valeur de l'input sans espace blanc
+    let value = lastName.value.trim();
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
     if(value.length >= 2 && value != null) {
-      console.log("Last Name ok");
       parentLast.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
@@ -122,15 +123,9 @@ const submitBtn = document.getElementById('btn-submit');
     * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function emailValidate(){
-    /**
-     * Récupère la longueur du texte
-     * @type {string}
-     */
+    //Récupère la valeur de l'input
     let value = email.value;
-    /**
-     * Regex pour valider le mail
-     * @type {RegExp}
-     */
+    //Regex pour valider le mail
     let regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if(regex.test(value)){
@@ -148,15 +143,9 @@ const submitBtn = document.getElementById('btn-submit');
     * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function birthdateValidate(){
-    /**
-     * Récupère la valeur de la date entrée 
-     * @type {number}
-     */
+    //Récupère la valeur de la date entrée par l'utilisateur
     let value = birthdate.value;
-    /**
-     * Regex pour valider la date de naissance
-     * @type {RegExp}
-     */
+    //Regex pour valider la date
     let regex = new RegExp(".*[0-9].*");
 
 
@@ -176,10 +165,7 @@ const submitBtn = document.getElementById('btn-submit');
     * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function quantityValidate() {
-    /**
-     * Récupère la valeur entrée
-     * @type {number}
-     */
+    //Récupère la valeur numérique entrée
     let numberValue = quantity.value;
 
     //On vérifie que l'input est de type nombre et contient au moins 1 caractère
@@ -204,10 +190,8 @@ const submitBtn = document.getElementById('btn-submit');
     for (let i = 0; i<checkBtn.length; i++) {
       //On vérifie si que le type est bien 'radio' et que le bouton est coché
       if (checkBtn[i].type == 'radio' && checkBtn[i].checked) {
-        /**
-         * Récupère le parent du bouton radio coché
-         * @type {HTMLElement}
-         */
+        
+        //Récupère le parent du bouton radio coché
         let parentLocation = checkBtn[i].parentElement;
         parentLocation.removeAttribute('data-error-visible', 'true');
         console.log(parentLocation)
