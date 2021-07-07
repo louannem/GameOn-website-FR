@@ -22,15 +22,19 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// close modal events
+// Events listener pour fermer le modal
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 closeBtn2.forEach((btn2) => btn2.addEventListener("click", closeModal2));
 
-// close modal form
+/**
+ * Fonction pour fermer le modal
+ */
 function closeModal() {
   modalbg.style.display= "none";
 }
-// second function to close modal form (in validation message)
+/**
+ * Seconde fonction pour fermer le modal (bouton dans le message de validation)
+ */
 function closeModal2() {
   modalbg.style.display="none";
 }
@@ -77,7 +81,7 @@ const submitBtn = document.getElementById('btn-submit');
 
  /**
   * Check first name validity function
-  * @returns 
+  * @returns {boolean} Retourne true ou false selon la validation du champ
   */
   function firstValidate(){
     /** @type{string}     */
@@ -96,7 +100,7 @@ const submitBtn = document.getElementById('btn-submit');
 
    /**
     * Check last name validity function
-    * @returns 
+    * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function lastValidate(){
     /** @type{string}     */
@@ -113,7 +117,10 @@ const submitBtn = document.getElementById('btn-submit');
     }
   }
 
-   //Check email validity function
+   /**
+    * Check email validity function
+    * @returns {boolean} Retourne true ou false selon la validation du champ
+    */
   function emailValidate(){
     /**
      * Récupère la longueur du texte
@@ -135,11 +142,10 @@ const submitBtn = document.getElementById('btn-submit');
       return false
     }
   }
-
   
    /**
     * Check birthdate validity function
-    * @returns 
+    * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function birthdateValidate(){
     /**
@@ -167,7 +173,7 @@ const submitBtn = document.getElementById('btn-submit');
 
    /**
     * Check number validity function
-    * @returns 
+    * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function quantityValidate() {
     /**
@@ -191,7 +197,7 @@ const submitBtn = document.getElementById('btn-submit');
 
    /**
     * Check checked location function
-    * @returns 
+    * @returns {boolean} Retourne true ou false selon la validation du champ
     */
   function locationValidate(){
     //Pour chaque bouton radio
@@ -218,7 +224,7 @@ const submitBtn = document.getElementById('btn-submit');
     
   /**
    * Check agreement box
-   * @returns 
+   * @returns {boolean} Retourne true ou false selon la validation du champ
    */
   function agreeValidate(){
     if(agreeBtn.checked) {
@@ -233,14 +239,14 @@ const submitBtn = document.getElementById('btn-submit');
 
 
 /**
- * Validate function to send the form
+ * Fonction validate pour valider et envoyer le formulaire
  * @param {event} e - event object
  */
 function validate(e){
   //Empêche le formulaire de s'envoyer
   e.preventDefault();
 
-  //Exécute les fonctions qui valident les champs
+  //Récupère et stocke la valeur booléenne retournée par les fonctions qui valident les champs
   let firstValidation = firstValidate();
   let lastValidation = lastValidate();
   let emailValidation = emailValidate();
@@ -263,7 +269,10 @@ function validate(e){
     let form = document.querySelector('form');
     form.style.display="none";
 
-    //Event listener pour valider le formulaire onclick
+    /**
+     * Event listener pour valider le formulaire onclick
+     * @param {MouseEvent} event 
+     */
     form.addEventListener('click', function before_submit(event){
       //Message de validation
       let validation = document.getElementById('formValidation');
@@ -272,7 +281,7 @@ function validate(e){
       setTimeout(function wait(){
         // Attends 3 secondes avant de valider le formulaire
         form.submit();
-      },1000);
+      },000);
     
       // Empêche le formulaire d'être validé si tout ne retourne pas true
       event.preventDefault();
