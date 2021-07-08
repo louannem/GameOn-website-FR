@@ -88,14 +88,14 @@ const submitBtn = document.getElementById('btn-submit');
     let value = firstName.value.trim();
 
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères 
-    if(value.length >= 2 && value != null) {
+    if(value.length >= 2) {
       parentFirst.removeAttribute('data-error-visible', 'true');
-      return true
+      return true;
     }     
     else { 
       parentFirst.setAttribute('data-error-visible','true');
       parentFirst.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus.');
-      return false 
+      return false ;
     }
   }
 
@@ -108,13 +108,13 @@ const submitBtn = document.getElementById('btn-submit');
     //Récupère la valeur de l'input sans espace blanc
     let value = lastName.value.trim();
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
-    if(value.length >= 2 && value != null) {
+    if(value.length >= 2) {
       parentLast.removeAttribute('data-error-visible', 'true');
       return true
     } else { 
       parentLast.setAttribute('data-error-visible','true');
       parentLast.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus.');
-      return false 
+      return false ;
     }
   }
 
@@ -130,11 +130,11 @@ const submitBtn = document.getElementById('btn-submit');
 
     if(regex.test(value)){
       parentEmail.removeAttribute('data-error-visible', 'true');
-      return true
+      return true;
     } else {
       parentEmail.setAttribute('data-error-visible','true');
       parentEmail.setAttribute('data-error', 'Veuillez entrer une adresse mail valide.');
-      return false
+      return false;
     }
   }
   
@@ -151,7 +151,7 @@ const submitBtn = document.getElementById('btn-submit');
 
     if (regex.test(value)){
       parentBirth.removeAttribute('data-error-visible');
-      return true
+      return true;
     } else {
       parentBirth.setAttribute('data-error-visible','true');
       parentBirth.setAttribute('data-error', 'Veuillez entrer une date de naissance valide.')
@@ -171,11 +171,11 @@ const submitBtn = document.getElementById('btn-submit');
     //On vérifie que l'input est de type nombre et contient au moins 1 caractère
     if(quantity["type"]=="number" && numberValue.length > 0) {
       parentQuantity.removeAttribute('data-error-visible');
-      return true
+      return true;
     } else {  
       parentQuantity.setAttribute('data-error-visible','true');
       parentQuantity.setAttribute('data-error', 'Veuillez entrer un nombre.')
-      return false
+      return false;
     }
   }
 
@@ -202,7 +202,7 @@ const submitBtn = document.getElementById('btn-submit');
         parentLocation.setAttribute('data-error', 'Veuillez choisir une option.')
       }
     }
-    return false
+    return false;
   }
 
     
@@ -213,11 +213,11 @@ const submitBtn = document.getElementById('btn-submit');
   function agreeValidate(){
     if(agreeBtn.checked) {
       parentAgree.removeAttribute('data-error-visible', 'true');
-      return true
+      return true;
     } else { 
       parentAgree.setAttribute('data-error-visible', 'true');
       parentAgree.setAttribute('data-error', 'Vous devez accepter les termes et conditions.');
-      return false
+      return false;
       }
   }
 
@@ -241,13 +241,13 @@ function validate(e){
 
     //Si toutes les entrées du formulaire sont correctes
     if(
-      firstValidation===true && 
-      lastValidation===true && 
-      emailValidation===true && 
-      birthdateValidation===true && 
-      quantityValidation===true && 
-      locationValidation===true && 
-      agreeValidation===true) {
+      firstValidation && 
+      lastValidation && 
+      emailValidation && 
+      birthdateValidation && 
+      quantityValidation && 
+      locationValidation && 
+      agreeValidation) {
         
     //On cache le formulaire
     let form = document.querySelector('form');
@@ -261,11 +261,11 @@ function validate(e){
       //Message de validation
       let validation = document.getElementById('formValidation');
       validation.style.display="inline";
-      //Fonction pour afficher le message une certaine durée
-      setTimeout(function wait(){
-        // Attends 3 secondes avant de valider le formulaire
+
+      //Fonction pour envoyer le formulaire en appuyant sur le bouton 'Fermer'
+      document.getElementById('submitForm').addEventListener('click', function submit(){
         form.submit();
-      },000);
+      });
     
       // Empêche le formulaire d'être validé si tout ne retourne pas true
       event.preventDefault();
