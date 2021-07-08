@@ -262,11 +262,17 @@ function validate(e){
       let validation = document.getElementById('formValidation');
       validation.style.display="inline";
 
-      //Fonction pour envoyer le formulaire en appuyant sur le bouton 'Fermer'
-      document.getElementById('submitForm').addEventListener('click', function submit(){
+      //Appels de la fonction pour envoyer le formulaire au click
+      document.getElementById('submitFormBtn').addEventListener('click', submit);
+      document.getElementById('submitForm').addEventListener('click', submit);
+
+      /**
+       * Fonction pour envoyer le formulaire en appuyant sur le bouton 'Fermer' ou la croix
+       */
+      function submit(){
         form.submit();
-      });
-    
+      }
+
       // Empêche le formulaire d'être validé si tout ne retourne pas true
       event.preventDefault();
     });  
