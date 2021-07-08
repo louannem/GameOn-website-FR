@@ -110,7 +110,7 @@ const submitBtn = document.getElementById('btn-submit');
     //On vérifie que l'input n'est pas vide et contient au moins 2 caractères
     if(value.length >= 2) {
       parentLast.removeAttribute('data-error-visible', 'true');
-      return true
+      return true;
     } else { 
       parentLast.setAttribute('data-error-visible','true');
       parentLast.setAttribute('data-error', 'Veuillez entrer 2 caractères ou plus.');
